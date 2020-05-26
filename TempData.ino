@@ -5,16 +5,15 @@
 
 using namespace std;
 
-Data *dataTemp = new Data();
-Rfid *reader = new Rfid();
-WifiSetup *wifi = new WifiSetup();
+Data* dataTemp = new Data();
+Rfid* reader = new Rfid();
+WifiSetup* wifi= new WifiSetup();
 String ID;
 
 
 void setup() {
     Serial.begin(115200);
     Serial.flush();
-
     reader->setupRfid();
     wifi->setupWifi();
 }

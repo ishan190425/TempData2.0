@@ -36,7 +36,6 @@ void Data::dataSetup() {
         int retval = client->connect(host, httpsPort);
         if (retval == 1) {
             flag = true;
-            Serial.println("test1");
             break;
         } else
             Serial.println("Connection failed. Retrying...");
