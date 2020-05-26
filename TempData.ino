@@ -22,6 +22,7 @@ void loop() {
     ID = reader->readCard();
     if (ID.length() > 0) {
         Serial.println("ID: " + ID + "    " + "Temp: 42");
+        wifi->isConnected();
         dataTemp->dataSetup();
         dataTemp->sendData(42, ID);
         dataTemp->dataDisconnect();

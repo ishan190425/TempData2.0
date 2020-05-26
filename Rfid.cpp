@@ -11,8 +11,6 @@ void Rfid::setupRfid() {
     // put your setup code here, to run once:
     SPI.begin();
     mfrc522.PCD_Init();
-    mfrc522.PCD_DumpVersionToSerial(); //dumps info about version of scanner
-
 }
 
 String Rfid::readCard() {

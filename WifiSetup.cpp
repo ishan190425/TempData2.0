@@ -17,9 +17,16 @@ void WifiSetup::setupWifi() {
         delay(500);
         Serial.print(".");
     }
+    
     Serial.println("");
     Serial.println("WiFi connected");
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
+}
 
+void WifiSetup::isConnected(){
+  if(WiFi.status() != WL_CONNECTED){
+    setupWifi();
+  }
+  return;
 }

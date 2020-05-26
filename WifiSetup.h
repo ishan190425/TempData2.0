@@ -4,4 +4,5 @@
 class WifiSetup {
 public:
     void setupWifi();
+    void isConnected();
 };
