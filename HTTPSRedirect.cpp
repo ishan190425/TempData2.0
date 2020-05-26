@@ -8,7 +8,6 @@
  */
 
 #include "HTTPSRedirect.h"
-#include "DebugMacros.h"
 
 HTTPSRedirect::HTTPSRedirect(void) : _httpsPort(443) {
     Init();
@@ -48,7 +47,6 @@ bool HTTPSRedirect::printRedir(void) {
     // Create HTTP/1.1 compliant request string
     // HTTP/1.1 complaint request packet must exist
 
-    DPRINTLN(_Request);
 
     // Make the actual HTTPS request using the method
     // print() from the WifiClientSecure class
@@ -178,16 +176,12 @@ bool HTTPSRedirect::getLocationURL(void) {
         // get remaining url
         _redirUrl = String('/') + readStringUntil('\n');
     } else {
-        DPRINT("No valid 'Location' field found in header!");
+
     }
 
     // Create a GET request for the new location
     createGetRequest(_redirUrl, _redirHost.c_str());
 
-    DPRINT("_redirHost: ");
-    DPRINTLN(_redirHost);
-    DPRINT("_redirUrl: ");
-    DPRINTLN(_redirUrl);
 
     return flag;
 }
@@ -208,7 +202,6 @@ void HTTPSRedirect::fetchHeader(void) {
     while (connected()) {
         line = readStringUntil('\n');
 
-        DPRINTLN(line);
 
         // HTTP headers are terminated by a CRLF ('\r\n')
         // Hence the final line will contain only '\r'
@@ -243,7 +236,7 @@ void HTTPSRedirect::fetchHeader(void) {
 
 void HTTPSRedirect::fetchBodyUnChunked(unsigned len) {
     String line;
-    DPRINTLN("Body:");
+
 
     while ((connected()) && (len > 0)) {
         line = readStringUntil('\n');
@@ -276,8 +269,6 @@ void HTTPSRedirect::fetchBodyChunked(void) {
 
         // Chunk sizes are in hexadecimal so convert to integer
         chunkSize = (uint32_t) strtol((const char *) line.c_str(), NULL, 16);
-        DPRINT("Chunk Size: ");
-        DPRINTLN(chunkSize);
 
         // Terminating chunk is of size 0
         if (chunkSize == 0)
@@ -328,7 +319,7 @@ unsigned int HTTPSRedirect::getResponseStatus(void) {
         statusCode = line.substring(9, pos2).toInt();
         reasonPhrase = line.substring(pos2 + 1, line.length() - 1);
     } else {
-        DPRINTLN("Error! No valid Status Code found in HTTP Response.");
+
         statusCode = 0;
         reasonPhrase = "";
     }
@@ -336,10 +327,6 @@ unsigned int HTTPSRedirect::getResponseStatus(void) {
     _myResponse.statusCode = statusCode;
     _myResponse.reasonPhrase = reasonPhrase;
 
-    DPRINT("Status code: ");
-    DPRINTLN(statusCode);
-    DPRINT("Reason phrase: ");
-    DPRINTLN(reasonPhrase);
 
     return statusCode;
 }
@@ -446,14 +433,10 @@ bool HTTPSRedirect::reConnectFinalEndpoint(void) {
     if (connected())
         stop();
 
-    DPRINT("_redirHost: ");
-    DPRINTLN(_redirHost);
-    DPRINT("_redirUrl: ");
-    DPRINTLN(_redirUrl);
 
     // Connect to stored final endpoint
     if (!connect(_redirHost.c_str(), _httpsPort)) {
-        DPRINTLN("Connection to final URL failed!");
+
         return false;
     }
 
