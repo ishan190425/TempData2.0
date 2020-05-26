@@ -35,7 +35,7 @@ bool HTTPSRedirect::printRedir(void) {
     // Check if connection to host is alive
     if (!connected()) {
         Serial.println("Error! Not connected to host.");
-        ESP.restart(); //resets ESP if not connecting to host
+        //ESP.restart(); //resets ESP if not connecting to host
         return false;
     }
 
