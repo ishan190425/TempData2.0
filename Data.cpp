@@ -3,7 +3,7 @@
 
 const char *host = "script.google.com";
 const int httpsPort = 443;
-const char *GScriptId = "AKfycbx8w3G55xhOEcICzu1wchXZTzxXJeNg_5wPGIEM";
+const char *GScriptId = "AKfycbxaJjnqGv5WAzQwEtz1nMmP4a-hdE5CTaxsBxAYpJJp_M4gqvk";
 
 // Write to Google Spreadsheet
 String url = String("/macros/s/") + GScriptId + "/exec?tag=";
