@@ -12,19 +12,20 @@ String ID;
 
 
 void setup() {
-    Serial.begin(115200);
-    Serial.flush();
-    reader->setupRfid();
-    wifi->setupWifi();
+  Serial.begin(115200);
+  Serial.flush();
+  reader->setupRfid();
+  wifi->setupWifi();
 }
 
 void loop() {
-    ID = reader->readCard();
-    if (ID.length() > 0) {
-        Serial.println("ID: " + ID + "    " + "Temp: 42");
-        wifi->isConnected();
-        dataTemp->dataSetup();
-        dataTemp->sendData(42, ID);
-        dataTemp->dataDisconnect();
-    }
+  ID = reader->readCard();
+  if (ID.length() > 0) {
+    Serial.println("ID: " + ID + "    " + "Temp: 42");
+    wifi->isConnected();
+    dataTemp->dataSetup();
+    dataTemp->sendData(42, ID);
+    dataTemp->dataDisconnect();
+    delay(2000);
+  }
 }

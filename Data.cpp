@@ -1,8 +1,10 @@
+#include <dummy.h>
+
 #include "Data.h"
 
 
-const char *host = "script.google.com";
-const int httpsPort = 443;
+extern const char *host = "script.google.com";
+extern const int httpsPort = 443;
 const char *GScriptId = "AKfycbxaJjnqGv5WAzQwEtz1nMmP4a-hdE5CTaxsBxAYpJJp_M4gqvk";
 
 // Write to Google Spreadsheet
@@ -19,7 +21,6 @@ HTTPSRedirect *client = nullptr;
 // before the HTTPSRedirect object is instantiated
 // so that they can be written to Google sheets
 // upon instantiation
-
 void Data::dataSetup() {
 
   // Use HTTPSRedirect class to create a new TLS connection
@@ -78,5 +79,5 @@ void Data::sendData(float inputVal, String id) {
 
 
 void Data::dataDisconnect() {
-  client->connect("google.com", 443);
+  client->stop();
 }

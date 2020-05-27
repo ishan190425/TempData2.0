@@ -8,7 +8,9 @@
  */
 
 #include "HTTPSRedirect.h"
+#include "Data.h"
 
+Data* tempData = new Data();
 HTTPSRedirect::HTTPSRedirect(void) : _httpsPort(443) {
     Init();
 }
@@ -34,8 +36,9 @@ bool HTTPSRedirect::printRedir(void) {
 
     // Check if connection to host is alive
     if (!connected()) {
+        //connect("script.google.com",443);
         Serial.println("Error! Not connected to host.");
-        //ESP.restart(); //resets ESP if not connecting to host
+        ESP.restart(); //resets ESP if not connecting to host
         return false;
     }
 

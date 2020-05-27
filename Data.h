@@ -10,4 +10,6 @@ public:
 
     void dataDisconnect();
 
+    void isConnected();
+
 };
