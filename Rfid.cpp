@@ -34,5 +34,6 @@ String Rfid::readCard() {
         content.concat(String(mfrc522.uid.uidByte[i]));
     }
     //Serial.print(content);
+    content.replace(" ","");
     return content;
 }
