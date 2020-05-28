@@ -142,7 +142,7 @@ void HTTPSRedirect::createGetRequest(const String &url, const char *host) {
 // Create a HTTP POST request packet
 // POST headers must be terminated with a "\r\n\r\n"
 // POST requests have 1 single blank like between the end of the header fields and the body payload
-void HTTPSRedirect::createPostRequest(const String &url, const char *host, const String &payload) {
+/*void HTTPSRedirect::createPostRequest(const String &url, const char *host, const String &payload) {
     // Content-Length is mandatory in POST requests
     // Body content will include payload and a newline character
     unsigned int len = payload.length() + 1;
@@ -158,8 +158,24 @@ void HTTPSRedirect::createPostRequest(const String &url, const char *host, const
                "\r\n\r\n";
     //Serial.println("Test4");
     return;
-}
+}*/
+void HTTPSRedirect::createPostRequest(const String &url, const char *host) {
+    // Content-Length is mandatory in POST requests
+    // Body content will include payload and a newline character
+    //unsigned int len = payload.length() + 1;
 
+    _Request = String("POST ") + url + " HTTP/1.1\r\n" +
+               "Host: " + host + "\r\n" +
+               "User-Agent: ESP8266\r\n" +
+               (_keepAlive ? "" : "Connection: close\r\n") +
+               "Content-Type: " + _contentTypeHeader + "\r\n" +
+               "Content-Length: " + 
+               "\r\n" +
+               "\r\n" +
+               "\r\n\r\n";
+    //Serial.println("Test4");
+    return;
+}
 
 bool HTTPSRedirect::getLocationURL(void) {
 
@@ -368,11 +384,11 @@ bool HTTPSRedirect::GET(const String &url, const char *host, const bool &disp) {
     return retval;
 }
 
-bool HTTPSRedirect::POST(const String &url, const char *host, const String &payload) {
+/*bool HTTPSRedirect::POST(const String &url, const char *host, const String &payload) {
     return POST(url, host, payload, _printResponseBody);
-}
+}*/
 
-bool HTTPSRedirect::POST(const String &url, const char *host, const String &payload, const bool &disp) {
+/*bool HTTPSRedirect::POST(const String &url, const char *host, const String &payload, const bool &disp) {
     bool retval;
     bool oldval;
 
@@ -390,6 +406,34 @@ bool HTTPSRedirect::POST(const String &url, const char *host, const String &payl
 
     // Create request packet
     createPostRequest(url, host, payload);
+
+    // Call request handler
+    retval = printRedir();
+
+    _printResponseBody = oldval;
+    return retval;
+}*/
+bool HTTPSRedirect::POST(const String &url, const char *host){
+  return POST(url,host,_printResponseBody);
+}
+bool HTTPSRedirect::POST(const String &url, const char *host, const bool &disp) {
+    bool retval;
+    bool oldval;
+
+    // set _printResponseBody temporarily to argument passed
+    oldval = _printResponseBody;
+    _printResponseBody = disp;
+
+    // redirected Host and Url need to be initialized in case a
+    // reConnectFinalEndpoint() request is made after an initial request
+    // which did not have redirection
+    _redirHost = host;
+    _redirUrl = url;
+
+    InitResponse();
+
+    // Create request packet
+    createPostRequest(url, host);
 
     // Call request handler
     retval = printRedir();

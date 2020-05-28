@@ -10,7 +10,7 @@ const char *GScriptId = "AKfycbxaJjnqGv5WAzQwEtz1nMmP4a-hdE5CTaxsBxAYpJJp_M4gqvk
 // Write to Google Spreadsheet
 String url = String("/macros/s/") + GScriptId + "/exec?tag=";
 
-String payload = "42";
+//String payload = "42";
 
 
 String FinalStringToSend;
@@ -62,11 +62,12 @@ void Data::sendData(float inputVal, String id) {
   if (client != nullptr) {
     if (!client->connected()) {
       client->connect(host, httpsPort);
-      payload = "42";
+      //payload = "42";
       //Serial.println("POST Data to Sheet");
       FinalStringToSend = url + myString;
       //Serial.println("POST url :" + FinalStringToSend);
-      client->POST(FinalStringToSend, host, payload);
+      //client->POST(FinalStringToSend, host, payload);
+      client->POST(FinalStringToSend, host);
       client->GET(FinalStringToSend, host);
     }
     //client->GET(FinalStringToSend, host);
