@@ -8,7 +8,6 @@ include_directories(.)
 add_executable(TempData
         Data.cpp
         Data.h
-        DebugMacros.h
         HTTPSRedirect.cpp
         HTTPSRedirect.h
         Rfid.cpp
