@@ -63,7 +63,8 @@ private:
 
     void createGetRequest(const String &, const char *);
 
-    void createPostRequest(const String &, const char *, const String &);
+    //void createPostRequest(const String &, const char *, const String &);
+    void createPostRequest(const String &, const char *);
 
 #ifdef EXTRA_FNS
     void fetchBodyRaw(void);
@@ -82,10 +83,12 @@ public:
 
     bool GET(const String &, const char *, const bool &);
 
-    bool POST(const String &, const char *, const String &);
-
-    bool POST(const String &, const char *, const String &, const bool &);
-
+    //bool POST(const String &, const char *, const String &);
+    bool POST(const String &, const char *);
+      
+    //bool POST(const String &, const char *, const String &, const bool &);
+    bool POST(const String &, const char *, const bool &);
+      
     int getStatusCode(void);
 
     String getReasonPhrase(void);
