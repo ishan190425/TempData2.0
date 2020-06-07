@@ -9,7 +9,7 @@ Data* dataTemp = new Data();
 Rfid* reader = new Rfid();
 WifiSetup* wifi = new WifiSetup();
 String ID;
-float temp = 47;
+float temp = 96;
 
 void setup() {
   Serial.begin(115200);
