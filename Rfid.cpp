@@ -45,7 +45,10 @@ String Rfid::readCard() {
   content.replace(" ", "");
     tone(buzzerPin, 523); //creates buzzer noise
     delay(500);
+    noTone();
+    delay(500);
     tone(buzzerPin, 523); //creates buzzer noise
     delay(500);
+    noTone();
   return content;
 }

@@ -33,10 +33,15 @@ void WifiSetup::setupWifi() {
   Serial.println(WiFi.localIP());
     tone(buzzerPin, 523); //creates buzzer noise
     delay(500);
-    tone(buzzerPin, 523);
+    noTone();
     delay(500);
     tone(buzzerPin, 523);
     delay(500);
+    noTone();
+    delay(500);
+    tone(buzzerPin, 523);
+    delay(500);
+    noTone();
 }
 
 void WifiSetup::isConnected() {
