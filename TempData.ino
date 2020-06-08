@@ -14,7 +14,7 @@ Data* dataTemp = new Data();
 Rfid* reader = new Rfid();
 WifiSetup* wifi = new WifiSetup();
 String ID;
-float temp = 96;
+float temp = mlx.readObjectTempF() + 10.5;
 
 void setup() {
   rangefinder->rangeSetup();
@@ -28,11 +28,12 @@ void setup() {
 void loop() {
   ID = reader->readCard();
   if (ID.length() > 0) {
-    Serial.print(rangfinder->getDistanceCM());
-    while(15 >= rangefinder->getDistanceCM() || rangedfinder->getDistanceCM >= 17){
-      Serial.print(rangfinder->getDistanceCM());
-      delay(1000);
+    //Serial.print(rangefinder->getDistanceCM());
+    while(15 >= rangefinder->getDistanceCM() || rangefinder->getDistanceCM() >= 17){
+      Serial.println(rangefinder->getDistanceCM());
+      delay(500);
     }
+    rangefinder->checkRange();
     Serial.println("ID: " + ID + " " + "Temp: "+temp);
     wifi->isConnected();
     dataTemp->dataSetup();
