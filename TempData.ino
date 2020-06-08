@@ -29,13 +29,15 @@ void loop() {
   ID = reader->readCard();
   if (ID.length() > 0) {
     Serial.print(rangfinder->getDistanceCM());
-    if(15 < rangefinder->getDistanceCM() && rangefinder->getDistanceCM() < 17) {
+    while(15 >= rangefinder->getDistanceCM() || rangedfinder->getDistanceCM >= 17){
+      Serial.print(rangfinder->getDistanceCM());
+      delay(1000);
+    }
     Serial.println("ID: " + ID + " " + "Temp: "+temp);
     wifi->isConnected();
     dataTemp->dataSetup();
     dataTemp->sendData(temp, ID);
     dataTemp->dataDisconnect();
     delay(2000);
-    }
   }
 }
