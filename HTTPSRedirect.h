@@ -1,11 +1,11 @@
 /*  HTTPS on ESP8266 with follow redirects, chunked encoding support
- *  Version 2.1
- *  Author: Sujay Phadke
- *  Github: @electronicsguy
- *  Copyright (C) 2017 Sujay Phadke <electronicsguy123@gmail.com>
- *  All rights reserved.
- *
- */
+    Version 2.1
+    Author: Sujay Phadke
+    Github: @electronicsguy
+    Copyright (C) 2017 Sujay Phadke <electronicsguy123@gmail.com>
+    All rights reserved.
+
+*/
 #pragma once
 
 #include <WiFiClientSecure.h>
@@ -15,7 +15,7 @@
 #define OPTIMIZE_SPEED
 
 class HTTPSRedirect : public WiFiClientSecure {
-private:
+  private:
     const int _httpsPort;
     bool _keepAlive;
     String _redirUrl;
@@ -24,10 +24,10 @@ private:
     const char *_contentTypeHeader;
 
     struct headerFields {
-        String transferEncoding;
-        unsigned int contentLength;
+      String transferEncoding;
+      unsigned int contentLength;
 #ifdef EXTRA_FNS
-        String contentType;
+      String contentType;
 #endif
     };
 
@@ -36,10 +36,10 @@ private:
     String _Request;
 
     struct Response {
-        int statusCode;
-        String reasonPhrase;
-        bool redirected;
-        String body;
+      int statusCode;
+      String reasonPhrase;
+      bool redirected;
+      String body;
     };
 
     Response _myResponse;
@@ -71,7 +71,7 @@ private:
     void printHeaderFields(void);
 #endif
 
-public:
+  public:
 
     HTTPSRedirect(void);
 
@@ -83,12 +83,12 @@ public:
 
     bool GET(const String &, const char *, const bool &);
 
-    //bool POST(const String &, const char *, const String &);
+
     bool POST(const String &, const char *);
-      
-    //bool POST(const String &, const char *, const String &, const bool &);
+
+
     bool POST(const String &, const char *, const bool &);
-      
+
     int getStatusCode(void);
 
     String getReasonPhrase(void);

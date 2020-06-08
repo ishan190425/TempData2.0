@@ -4,7 +4,7 @@
 
 
 class WifiSetup {
-public:
+  public:
     void setupWifi();
     void isConnected();
 };

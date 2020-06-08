@@ -48,10 +48,6 @@ void Data::dataSetup() {
     Serial.println("Exiting...");
     return;
   }
-
-  //payload = "tag=aaaa&value=122";
-  //client->POST(url, host, payload, false);
-  //client->GET(url, host);
 }
 
 void Data::sendData(float inputVal, String id) {
@@ -62,19 +58,13 @@ void Data::sendData(float inputVal, String id) {
   if (client != nullptr) {
     if (!client->connected()) {
       client->connect(host, httpsPort);
-      //payload = "42";
-      //Serial.println("POST Data to Sheet");
       FinalStringToSend = url + myString;
-      //Serial.println("POST url :" + FinalStringToSend);
-      //client->POST(FinalStringToSend, host, payload);
       client->POST(FinalStringToSend, host);
       client->GET(FinalStringToSend, host);
     }
-    //client->GET(FinalStringToSend, host);
   } else {
     Serial.println(" >> Failed to POST data");
   }
-  //Serial.println("GET url :" + FinalStringToSend);
   client->GET(FinalStringToSend, host);
 }
 

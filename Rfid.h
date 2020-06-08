@@ -1,7 +1,7 @@
 #include "Arduino.h"
 
 class Rfid {
-public:
+  public:
     String readCard();
 
     void setupRfid();

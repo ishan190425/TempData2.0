@@ -3,7 +3,7 @@
 #include "wiring.h"
 
 class Data {
-public:
+  public:
     void dataSetup();
 
     void sendData(float, String);
