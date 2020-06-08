@@ -2,6 +2,11 @@
 #include "Data.h"
 #include "Rfid.h"
 #include "WifiSetup.h"
+#include <Adafruit_MLX90614.h>
+#include "Rangefinder.h" 
+
+Adafruit_MLX90614 mlx = Adafruit_MLX90614();
+Rangefinder* rangefinder = new Rangefinder();
 
 using namespace std;
 
@@ -12,6 +17,8 @@ String ID;
 float temp = 96;
 
 void setup() {
+  rangefinder->rangeSetup();
+  mlx.begin();  
   Serial.begin(115200);
   Serial.flush();
   reader->setupRfid();
@@ -21,11 +28,14 @@ void setup() {
 void loop() {
   ID = reader->readCard();
   if (ID.length() > 0) {
+    Serial.print(rangfinder->getDistanceCM());
+    if(15 < rangefinder->getDistanceCM() && rangefinder->getDistanceCM() < 17) {
     Serial.println("ID: " + ID + " " + "Temp: "+temp);
     wifi->isConnected();
     dataTemp->dataSetup();
     dataTemp->sendData(temp, ID);
     dataTemp->dataDisconnect();
     delay(2000);
+    }
   }
 }
