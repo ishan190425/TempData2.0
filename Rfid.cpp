@@ -44,11 +44,11 @@ String Rfid::readCard() {
 
   content.replace(" ", "");
     tone(buzzerPin, 523); //creates buzzer noise
-    delay(500);
+    delay(200);
     noTone();
-    delay(500);
+    delay(200);
     tone(buzzerPin, 523); //creates buzzer noise
-    delay(500);
+    delay(200);
     noTone();
   return content;
 }

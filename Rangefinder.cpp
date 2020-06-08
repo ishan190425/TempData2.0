@@ -95,7 +95,7 @@ void Rangefinder::noTone() {
 void Rangefinder::checkRange() {
   digitalWrite(red, LOW);
   digitalWrite(green, HIGH);
-  delay(500);
+  delay(1000);
   tone(buzzerPin, 523); //creates buzzer noise
   delay(500);
   noTone();
