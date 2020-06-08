@@ -1,12 +1,22 @@
 #include <MFRC522.h>
 #include <SPI.h>
+#include <Wire.h>
 #include "wiring.h"
 #include "Rfid.h"
 
 int count = 0;
-
+const int buzzerPin = buzzerPinWIRE;
 MFRC522 mfrc522 = MFRC522(ssPin, resetPinRfid); //creates instance
 
+void Rfid::tone(byte pin, int freq) {
+    ledcSetup(0, 2000, 8); // setup beeper
+    ledcAttachPin(buzzerPin, 0); // attach beeper
+    ledcWriteTone(0, freq); // play tone
+}
+
+void Rfid::noTone() {
+    tone(buzzerPin, 0);
+}
 void Rfid::setupRfid() {
   // put your setup code here, to run once:
   SPI.begin();
@@ -34,5 +44,9 @@ String Rfid::readCard() {
   }
 
   content.replace(" ", "");
+    tone(buzzerPin, 523); //creates buzzer noise
+    delay(500);
+    tone(buzzerPin, 523); //creates buzzer noise
+    delay(500);
   return content;
 }

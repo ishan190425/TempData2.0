@@ -93,16 +93,14 @@ void Rangefinder::noTone() {
 }
 
 void Rangefinder::checkRange() {
-  //Serial.print(getDistanceCM());
-  //if(15 < getDistanceCM() && getDistanceCM() < 17) {
   digitalWrite(red, LOW);
   digitalWrite(green, HIGH);
+  delay(500);
   tone(buzzerPin, 523); //creates buzzer noise
   delay(500);
   noTone();
   digitalWrite(red, HIGH);
   digitalWrite(green, LOW);
-  // }
   Serial.println();
   delay(500);
 }
