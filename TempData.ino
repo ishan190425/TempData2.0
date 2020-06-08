@@ -4,6 +4,7 @@
 #include "WifiSetup.h"
 #include <Adafruit_MLX90614.h>
 #include "Rangefinder.h"
+#include <Wire.h>
 
 Adafruit_MLX90614 mlx = Adafruit_MLX90614();
 Rangefinder* rangefinder = new Rangefinder();

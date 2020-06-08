@@ -1,6 +1,5 @@
 #include <MFRC522.h>
 #include <SPI.h>
-#include <Wire.h>
 #include "wiring.h"
 #include "Rfid.h"
 
