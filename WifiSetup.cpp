@@ -1,7 +1,7 @@
 #include "WifiSetup.h"
 #include "wiring.h"
-const char* ssid = "MyHomeWifiGuest";
-const char* password = "Iamaguest";
+const char* ssid = "insert wifi name here";
+const char* password = "insert wifi password here";
 const int buzzerPin = buzzerPinWIRE;
 
 void WifiSetup::tone(byte pin, int freq) {
