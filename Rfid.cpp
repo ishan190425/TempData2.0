@@ -2,20 +2,15 @@
 #include <SPI.h>
 #include "wiring.h"
 #include "Rfid.h"
+#include "Music.h"
 
 int count = 0;
-const int buzzerPin = buzzerPinWIRE;
+
 MFRC522 mfrc522 = MFRC522(ssPin, resetPinRfid); //creates instance
+Music* buzzer2 = new Music();
 
-void Rfid::tone(byte pin, int freq) {
-    ledcSetup(0, 2000, 8); // setup beeper
-    ledcAttachPin(buzzerPin, 0); // attach beeper
-    ledcWriteTone(0, freq); // play tone
-}
 
-void Rfid::noTone() {
-    tone(buzzerPin, 0);
-}
+
 void Rfid::setupRfid() {
   // put your setup code here, to run once:
   SPI.begin();
@@ -43,12 +38,6 @@ String Rfid::readCard() {
   }
 
   content.replace(" ", "");
-    tone(buzzerPin, 523); //creates buzzer noise
-    delay(200);
-    noTone();
-    delay(200);
-    tone(buzzerPin, 523); //creates buzzer noise
-    delay(200);
-    noTone();
+  buzzer2->playMusic(2);
   return content;
 }

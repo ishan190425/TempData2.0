@@ -1,12 +1,16 @@
 #include "Arduino.h"
 #include "Rangefinder.h"
 #include "wiring.h"
+#include "Music.h"
+
 //PUT IN WIRING LATER
 const int red = redWIRE;
 const int green = greenWIRE;
 const int triggerPin = triggerPinWIRE;
 const int echoPin = echoPinWIRE;
-const int buzzerPin = buzzerPinWIRE;
+
+Music* buzzer3 = new Music();
+
 
 
 static portMUX_TYPE synch = portMUX_INITIALIZER_UNLOCKED;
@@ -82,23 +86,12 @@ void Rangefinder::rangeSetup() {
 
 }
 
-void Rangefinder::tone(byte pin, int freq) {
-  ledcSetup(0, 2000, 8); // setup beeper
-  ledcAttachPin(buzzerPin, 0); // attach beeper
-  ledcWriteTone(0, freq); // play tone
-}
-
-void Rangefinder::noTone() {
-  tone(buzzerPin, 0);
-}
 
 void Rangefinder::checkRange() {
   digitalWrite(red, LOW);
   digitalWrite(green, HIGH);
   delay(1000);
-  tone(buzzerPin, 523); //creates buzzer noise
-  delay(500);
-  noTone();
+  buzzer3->playMusic(1);
   digitalWrite(red, HIGH);
   digitalWrite(green, LOW);
   Serial.println();

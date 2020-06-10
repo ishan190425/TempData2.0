@@ -1,18 +1,14 @@
 #include "WifiSetup.h"
 #include "wiring.h"
-const char* ssid = "MyHomeWifiGuest";
-const char* password = "Iamaguest";
-const int buzzerPin = buzzerPinWIRE;
+#include "Music.h"
 
-void WifiSetup::tone(byte pin, int freq) {
-    ledcSetup(0, 2000, 8); // setup beeper
-    ledcAttachPin(buzzerPin, 0); // attach beeper
-    ledcWriteTone(0, freq); // play tone
-}
+const char* ssid = "Anands2.4";
+const char* password = "Lionking9973!";
 
-void WifiSetup::noTone() {
-    tone(buzzerPin, 0);
-}
+Music* buzzer1 = new Music();
+
+
+
 void WifiSetup::setupWifi() {
   Serial.println();
   Serial.print("Connecting to wifi: ");
@@ -31,17 +27,7 @@ void WifiSetup::setupWifi() {
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-    tone(buzzerPin, 523); //creates buzzer noise
-    delay(200);
-    noTone();
-    delay(200);
-    tone(buzzerPin, 523);
-    delay(200);
-    noTone();
-    delay(200);
-    tone(buzzerPin, 523);
-    delay(200);
-    noTone();
+  buzzer1->playMusic(3);
 }
 
 void WifiSetup::isConnected() {
