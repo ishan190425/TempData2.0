@@ -1,8 +1,8 @@
 #include "WifiSetup.h"
 #include "wiring.h"
 #include "Music.h"
-const char* ssid = "Anands2.4";
-const char* password = "Lionking9973!";
+const char* ssid = "Enter Wifi Name";
+const char* password = "Enter Wifi Password";
 Music* buzzer1 = new Music();
 
 
